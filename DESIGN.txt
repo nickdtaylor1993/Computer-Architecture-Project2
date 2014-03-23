@@ -1,0 +1,71 @@
+//Author: Nicholas Taylor 
+************************************DESIGN DOCUMENT*****************************
+For my design I created 3 classes:
+
+1.	Cache.cpp
+My Cache class is my main class which represents the simulation of the Cache.  
+In my Cache class I implemented all the public methods that are needed from the trace.cpp and also private helper methods.  My Cache class also uses as an data structure a dynamic allocated array of Sets which is a class to represent the Sets's within a Cache. 
+
+Important methods:
+initialize method which inits the capacity, block_size,
+and assoc of the Cache.
+
+addAccess method which takes in an address, the size, and type and using the
+array of Sets I add the addresses into the Set and the Set determines if the
+address is a hit or miss in the cache and also adds updates the content of the
+cache.  This method also determines the information about the address
+including the block add, index, and tag.  Then using this information such as
+index to determine which Set to enter and the tag to test whether the address
+is within the cache.  
+
+
+
+2.	Set.cpp
+
+My Set class is used to represent the Sets's that are included within the cache. 
+In my Set class I use an data structure of a dynamic allocated array of blocks
+from the Block class which represents the block or blocks that are within the
+Sets of the Cache. 
+
+Important Methods: In my Set class my most important methods are my
+setNumberOfBlocks which is used to init the size of my dynamic array of Block
+objects.  
+
+printSet is another important method which is used to print the contents of
+the set which includes the Block content such as the index, tag, valid bit,
+and lru. 
+
+addAccess is a method I use in the Set class which passes in a tag which is
+calculated from the Cache class's addAccess method and what this method does
+is returns a boolean of whether or not this tag results in a hit or a miss in
+the Cache within the set.  This method also updates the Block content as well
+using the helper functions such as updateLru, updateLruHIt, findHighestLru,
+and updateLruMiss.  
+
+
+3.	Block.cpp  
+
+My Block class is used to represent the blocks that are within the Sets's in the Cache. 
+In my Block class I have the data fields for lru, tag, index, and valid bit
+which represents the meta data that I will use to print the content of when
+displaying the content of my Cache.  
+
+My most important method is my update method which takes holds 3 parameters:
+tag, index, and valid bit and inits the attributes in the class to update the
+content of the specific block within the Set of the Cache. 
+
+The rest of the methods within this class are accessors and mutators for the
+attributes of tag, index, lru, and valid bit.  
+
+
+
+*************************
+How everything interacts 
+*************************
+All my classes interact by using the Cache class which uses a array of Sets.
+Then in my Set class I use to find whether addresses are located within the
+cache, and also to use to include the Blocks that inside the Sets of the Cache
+which is used with a array of Blocks.  My Block class then updates the meta
+data which is the lru, tag, index, and valid bit. This then allows for
+effiecient simulation of Cache which is composed of Sets which the Sets are
+composed of Blocks.  
